@@ -5,8 +5,8 @@
 - open API 2종(서울시 하수관 수위 데이터, 서울시 강우량 데이터)을 활용
 - GUBN_NAME(하수관 구청식별 코드) 과 GU_NAME(강우량 구청식별 코드) 등을 파라메터로 입력받아 결합된 데이터를 리턴
 - 데이터는 JSON으로 전달
-### 🌧 서울시 강우량 open API 응답 sample
-http://openapi.seoul.go.kr:8088/sample/json/ListRainfallService/1/2/%EC%A2%85%EB%A1%9C%EA%B5%AC
+### 서울시 강우량 open API 응답 sample
+http://openapi.seoul.go.kr:8088/sample/json/ListRainfallService/1/2/종로구  
 path variavle : /{index start}/{index end}/{GU_NAME}
 ~~~
 {
@@ -37,8 +37,8 @@ path variavle : /{index start}/{index end}/{GU_NAME}
     }
 }
 ~~~
-### 💧 서울시 하수관 수위 open API 응답 sample
-http://openapi.seoul.go.kr:8088/sample/json/DrainpipeMonitoringInfo/1/2/01/2022111700/2022111700
+### 서울시 하수관 수위 open API 응답 sample
+http://openapi.seoul.go.kr:8088/sample/json/DrainpipeMonitoringInfo/1/2/01/2022111700/2022111700  
 path variable : /{index start}/{index end}/{GUBN_CODE}/{YYYYMMDDHH}/{YYYYMMDDHH}
 ~~~
 {
@@ -74,22 +74,22 @@ path variable : /{index start}/{index end}/{GUBN_CODE}/{YYYYMMDDHH}/{YYYYMMDDHH}
 
 ## 📐 설계방향
 
-### 🔧 사용 기술
+### 사용 기술
 - **Back-End** : Python, Django, Django REST framework, Pandas
 - **Database** : SQLite
 - **Lint** : Black
 - **ETC** : Git, Github
 
-### ✍🏻 개요 
+### 개요 
 1. 구청별 식별자(GUBN_CODE, GU_NAME)를 담는 테이블 필요    
 2. 해당 구청의 데이터별 관측소 정보를 가진 테이블 필요    
 3. 요청시 1번에 해당하는 DB에 구청테이블의 각 구청별 id를 통해서 path variable로 조회 (ex. /some_domain/seoul/\<int:gu_id\>/)
 4. 1,2번에 해당하는 내용은 batch 앱을 따로 생성해 django-admin custom command로 csv data를 해당 테이블에 삽입  
 
-### ⚙️ ERD
+### ERD
 <img src="./img/LAB_Q_erd.png" width="600">
 
-### 👈🏻 API Endpoint
+### API Endpoint
 |INDEX|URI|METHOD|DESC|
 |:---:|:---|:---:|:---:|
 |1|/seoul/|GET|서울시 구청리스트 조회|
